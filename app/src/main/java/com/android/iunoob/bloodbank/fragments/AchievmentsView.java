@@ -39,7 +39,7 @@ import java.util.TimeZone;
 
 public class AchievmentsView extends Fragment {
 
-    private int cur_day, cur_month, cur_year, day, month, year, totday;
+    private int cur_day, cur_month, cur_year, day, month, year, totday,next_day,next_month,next_year;
     private Calendar calendar;
     private ProgressDialog pd;
     DatabaseReference db_ref, user_ref;
@@ -48,7 +48,7 @@ public class AchievmentsView extends Fragment {
     private TextView totalDonate, lastDonate, nextDonate, donateInfo,nextDonateDate;
 
     private String[] bloodgroup, divisionlist;
-    private String lastDate;
+    private String lastDate,nextDate;
 
     private View view;
     private Button yes;
@@ -68,7 +68,7 @@ public class AchievmentsView extends Fragment {
         pd.setCanceledOnTouchOutside(false);
         bloodgroup = getResources().getStringArray(R.array.Blood_Group);
         divisionlist = getResources().getStringArray(R.array.division_list);
-//        nextDonateDate= view.findViewById(R.id.setNextDonateDate);
+        nextDonateDate= view.findViewById(R.id.setNextDonateDate);
         lastDonate = view.findViewById(R.id.setLastDonate);
         totalDonate = view.findViewById(R.id.settotalDonate);
         donateInfo = view.findViewById(R.id.donateInfo);
@@ -108,9 +108,13 @@ public class AchievmentsView extends Fragment {
                                     totalDonate.setText(donorData.getTotalDonate()+" times");
                                     if(donorData.getTotalDonate() == 0) {
                                         lastDate = "01/01/2001";
+                                        nextDate = "01/01/2001";
                                         lastDonate.setText("Do not donate yet!");
+                                        nextDonateDate.setText("Do not donate yet");
                                     }
                                     else {
+                                        nextDate = donorData.getNextDonate();
+                                        nextDonateDate.setText(donorData.getNextDonate());
                                         lastDate = donorData.getLastDonate();
                                         lastDonate.setText(donorData.getLastDonate());
                                     }
@@ -168,6 +172,9 @@ public class AchievmentsView extends Fragment {
                                                cur_day = calendar.get(Calendar.DAY_OF_MONTH);
                                                cur_month = calendar.get(Calendar.MONTH)+1;
                                                cur_year = calendar.get(Calendar.YEAR);
+                                                next_day = calendar.get(Calendar.DAY_OF_MONTH);
+                                                next_month = calendar.get(Calendar.MONTH)+5;
+                                                next_year = calendar.get(Calendar.YEAR);
 
                                                 yes.setOnClickListener(new View.OnClickListener() {
                                                     @Override
@@ -176,6 +183,10 @@ public class AchievmentsView extends Fragment {
                                                                 .child(bloodgroup[getbg])
                                                                 .child(mAuth.getCurrentUser().getUid())
                                                                 .child("LastDonate").setValue(cur_day+"/"+cur_month+"/"+cur_year);
+                                                        db_ref.child(divisionlist[getdiv])
+                                                                .child(bloodgroup[getbg])
+                                                                .child(mAuth.getCurrentUser().getUid())
+                                                                .child("NextDonate").setValue(next_day+"/"+next_month+"/"+next_year);
                                                         db_ref.child(divisionlist[getdiv])
                                                                 .child(bloodgroup[getbg])
                                                                 .child(mAuth.getCurrentUser().getUid())
