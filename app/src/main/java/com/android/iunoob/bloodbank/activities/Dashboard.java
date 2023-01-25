@@ -21,6 +21,9 @@ import android.widget.TextView;
 import com.android.iunoob.bloodbank.R;
 import com.android.iunoob.bloodbank.fragments.AboutUs;
 import com.android.iunoob.bloodbank.fragments.AchievmentsView;
+import com.android.iunoob.bloodbank.fragments.BloodConnection;
+import com.android.iunoob.bloodbank.fragments.Food;
+import com.android.iunoob.bloodbank.fragments.Guidelines;
 import com.android.iunoob.bloodbank.fragments.BloodInfo;
 import com.android.iunoob.bloodbank.fragments.HomeView;
 import com.android.iunoob.bloodbank.fragments.NearByHospitalActivity;
@@ -152,6 +155,15 @@ public class Dashboard extends AppCompatActivity
         }
         if (id == R.id.devinfo) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new AboutUs()).commit();
+        }
+        if (id == R.id.BloodConnection) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new BloodConnection()).commit();
+        }
+        if (id == R.id.guidedonor) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new Guidelines()).commit();
+        }
+        if (id == R.id.foodinfo) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new Food()).commit();
         }
 
         return super.onOptionsItemSelected(item);

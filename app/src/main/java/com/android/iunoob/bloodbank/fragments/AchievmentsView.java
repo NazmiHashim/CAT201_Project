@@ -45,7 +45,7 @@ public class AchievmentsView extends Fragment {
     DatabaseReference db_ref, user_ref;
     FirebaseAuth mAuth;
 
-    private TextView totalDonate, lastDonate, nextDonate, donateInfo;
+    private TextView totalDonate, lastDonate, nextDonate, donateInfo,nextDonateDate;
 
     private String[] bloodgroup, divisionlist;
     private String lastDate;
@@ -68,6 +68,7 @@ public class AchievmentsView extends Fragment {
         pd.setCanceledOnTouchOutside(false);
         bloodgroup = getResources().getStringArray(R.array.Blood_Group);
         divisionlist = getResources().getStringArray(R.array.division_list);
+//        nextDonateDate= view.findViewById(R.id.setNextDonateDate);
         lastDonate = view.findViewById(R.id.setLastDonate);
         totalDonate = view.findViewById(R.id.settotalDonate);
         donateInfo = view.findViewById(R.id.donateInfo);

@@ -1,5 +1,7 @@
 package com.android.iunoob.bloodbank.viewmodels;
 
+import android.util.EventLogTags;
+
 /***
  Project Name: BloodBank
  Project Date: 10/12/18
@@ -9,8 +11,8 @@ package com.android.iunoob.bloodbank.viewmodels;
 
 public class UserData {
 
-    private String Name, Email, Contact, Address;
-    private int Gender, BloodGroup, Division;
+    private String Name, Email, Contact, Address,Description;
+    private int Health, Gender, BloodGroup, Division;
 
     public UserData() {
 
@@ -60,6 +62,15 @@ public class UserData {
         return Gender;
     }
 
+
+    public int getHealth(){
+        return Health;
+    }
+    public void setHealth(int health) {
+        this.Health = health;
+    }
+
+
     public void setName(String name) { this.Name = name; }
 
     public void setEmail(String email) {
@@ -71,4 +82,11 @@ public class UserData {
     }
 
 
+    public String  getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        this.Description = description;
+    }
 }

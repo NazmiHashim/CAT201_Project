@@ -11,4 +11,19 @@
         android:title="@string/devinfo"
         android:orderInCategory="101"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/BloodConnection"
+        android:title="@string/BloodConnection"
+        android:orderInCategory="102"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/foodinfo"
+        android:title="Meal Guide"
+        android:orderInCategory="103"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/guidedonor"
+        android:title="@string/GuideDonor"
+        android:orderInCategory="102"
+        app:showAsAction="never"/>
 </menu>

@@ -29,11 +29,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private EditText inputemail, inputpassword, retypePassword, fullName, address, contact;
+    private EditText inputemail, inputpassword, retypePassword, fullName, address, contact,description;
     private FirebaseAuth mAuth;
     private Button btnSignup;
     private ProgressDialog pd;
-    private Spinner gender, bloodgroup, division;
+    private Spinner gender, bloodgroup, division,health;
 
     private boolean isUpdate = false;
 
@@ -63,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
         gender = findViewById(R.id.gender);
         address = findViewById(R.id.inputAddress);
         division = findViewById(R.id.inputDivision);
+        health = findViewById(R.id.health );
+        description = findViewById(R.id.inputDescription);
         bloodgroup = findViewById(R.id.inputBloodGroup);
         contact = findViewById(R.id.inputMobile);
         isDonor = findViewById(R.id.checkbox);
@@ -94,7 +96,9 @@ public class ProfileActivity extends AppCompatActivity {
                         pd.show();
                         fullName.setText(userData.getName());
                         gender.setSelection(userData.getGender());
+                        health.setSelection(userData.getHealth());
                         address.setText(userData.getAddress());
+                        description.setText(userData.getDescription());
                         contact.setText(userData.getContact());
                         bloodgroup.setSelection(userData.getBloodGroup());
                         division.setSelection(userData.getDivision());
@@ -147,9 +151,11 @@ public class ProfileActivity extends AppCompatActivity {
                 final String ConfirmPassword = retypePassword.getText().toString();
                 final String Name = fullName.getText().toString();
                 final int Gender = gender.getSelectedItemPosition();
+                final int Health = health.getSelectedItemPosition();
                 final String Contact = contact.getText().toString();
                 final int BloodGroup = bloodgroup.getSelectedItemPosition();
                 final String Address = address.getText().toString();
+                final String Description = description.getText().toString();
                 final int Division = division.getSelectedItemPosition();
                 final String blood = bloodgroup.getSelectedItem().toString();
                 final String div   = division.getSelectedItem().toString();
@@ -196,6 +202,8 @@ public class ProfileActivity extends AppCompatActivity {
                                                     db_ref.child(id).child("BloodGroup").setValue(BloodGroup);
                                                     db_ref.child(id).child("Address").setValue(Address);
                                                     db_ref.child(id).child("Division").setValue(Division);
+                                                    db_ref.child(id).child("Health").setValue(Health);
+                                                    db_ref.child(id).child("Description").setValue(Description);
 
                                                     if(isDonor.isChecked())
                                                     {
@@ -231,6 +239,8 @@ public class ProfileActivity extends AppCompatActivity {
                             db_ref.child(id).child("BloodGroup").setValue(BloodGroup);
                             db_ref.child(id).child("Address").setValue(Address);
                             db_ref.child(id).child("Division").setValue(Division);
+                            db_ref.child(id).child("Health").setValue(Health);
+                            db_ref.child(id).child("Description").setValue(Description);
 
                             if(isDonor.isChecked())
                             {
