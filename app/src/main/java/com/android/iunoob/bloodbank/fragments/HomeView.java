@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
+import java.util.Collections;
 
 
 /***
@@ -48,6 +50,13 @@ public class HomeView extends Fragment {
     private BloodRequestAdapter restAdapter;
     private List<CustomUserData> postLists;
     private ProgressDialog pd;
+
+    public class DateComparator implements Comparator<CustomUserData>{
+        @Override
+        public int compare(CustomUserData item1, CustomUserData item2){
+            return item1.getDate().compareTo(item2.getDate());
+        }
+    }
 
     public HomeView() {
 
@@ -72,6 +81,7 @@ public class HomeView extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         getActivity().setTitle("Blood Point");
 
+        Collections.sort(postLists,new DateComparator());
         restAdapter = new BloodRequestAdapter(postLists);
         RecyclerView.LayoutManager pmLayout = new LinearLayoutManager(getContext());
         recentPosts.setLayoutManager(pmLayout);
@@ -85,7 +95,7 @@ public class HomeView extends Fragment {
     }
     private void AddPosts()
     {
-        Query allposts = donor_ref.child("posts");
+        Query allposts = donor_ref.child("posts").orderByChild("Date");
         pd.show();
         allposts.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
